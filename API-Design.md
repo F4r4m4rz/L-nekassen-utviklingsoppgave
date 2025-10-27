@@ -41,3 +41,21 @@
 - Første beskyttelse lag: Autorisasjon policy + ASP.NET Core autorisasjons middelware
 - Domenespesifikke autorisasjon bør ligge i forretningslaget.
 - Kritiske data relaterte autorisasjon bør ligge nær databasen (Data laget - repository)
+
+## Logging, feilhåndtering og vervåking
+
+- Strukturert logging (Serilog)
+- Centralisert logging system (Seq, Grafana, etc)
+- Alle håndterte og ikke håndterte feil bør formidle en desriptiv melding til brukeren
+  - Relaterte brukevennlig melding ved håndterte feil
+  - Nok data slik at brukeren kan enkelt få hjelp av support (eksempel: CorrelationId)
+- Loggene må ha nok informasjon med seg for kunne gjennskape de
+- Hoved aksjonene bør ha informasjon om brukte tid for å kuune overvåke ytelse
+- Verktøy som Dynatrace, Grafana eller lignende for å overvåke ytelse eller prod relaterte hendelser
+
+## Testing og dokumentasjon
+
+- NUnit/xUnit til unit og integrasjon testene
+- Cypress, Playwright eller lignende til frontend end to end testing
+- Open API/Swagger til API schema og dokumentasjon
+- readme filer, wiki sider eller lignende til dokumentering av viktige avgjørelser, arkitektur, ...
