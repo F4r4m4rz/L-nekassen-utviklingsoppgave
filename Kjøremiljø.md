@@ -39,6 +39,11 @@
   - Kun deployment av main og release grener ved tilstrekkelig testing in forkant
   - Kontrollert of planlagt deployments
 
+## Tilgjengelighet og skalerbarhet
+
+- Health check (Kan integreres med kubernetes for å automatisk restart)
+- Load balancing og auto scaling av CPU
+
 ## Sikkerhet of screts håndtering
 
 - Azure Key-vault til å håndtere secrets
