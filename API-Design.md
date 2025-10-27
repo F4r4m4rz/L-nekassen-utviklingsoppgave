@@ -56,6 +56,7 @@
 ## Testing og dokumentasjon
 
 - NUnit/xUnit til unit og integrasjon testene
+- InMemory testdata og EFCore database for testene
 - Cypress, Playwright eller lignende til frontend end to end testing
 - Open API/Swagger til API schema og dokumentasjon
 - readme filer, wiki sider eller lignende til dokumentering av viktige avgjørelser, arkitektur, ...

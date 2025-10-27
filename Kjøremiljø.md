@@ -43,3 +43,6 @@
 
 - Azure Key-vault til å håndtere secrets
 - Env variable til å håndtere azure key-vault secrets og andre super viktige secrets
+- OWASP Top 10
+- SAST og DAST kode skanning (Snyk, Veracode, ...)
+- Reglemesig Pentest
