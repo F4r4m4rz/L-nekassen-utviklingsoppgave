@@ -1,62 +1,62 @@
 # API Design
 
-## Valg av teknology og rammeverk
+## Valg av teknologi og rammeverk
 
-- Siste stable versjonen av .net (net9.0 for øyeblikket)
-- ASP.NET Core til API webben
-- EntityFramework.Core til DB intraksjoner
+- Siste stabile versjon av .NET (net9.0 per nå)
+- ASP.NET Core for API-webben
+- EntityFramework.Core for databaseinteraksjoner
 
 ## Struktur og arkitektur
 
-- Lagdeling (tilpasses av kompleksitet)
-  - Data lag
-    - Data entiteter som speiler DB
-    - DB migrasjoner
-    - EF.Core konfigrasjoner
-    - Eventuelle sql skripter som bør kjøres ved deployment kan også ligge her
-    - Repository mønster for DB transaksjoner
-  - Forretning lag
-    - Forretning relaterte entiteter (kan ligne eller være forskjellig av Data laget sin entiteter)
-    - Facade mønster for koordinere DB, eksterne systemer og forretningsrelaterte logikk
-  - Web
-    - ASP.NET Core applikasjonen
-    - API endepunkter
-    - Autentisering og autorisasjons policierne.
-    - API kontrakter (Request, Response)
+- Lagdeling (tilpasses etter kompleksitet)
+  - Data-lag
+    - Data-entiteter som speiler databasen
+    - Database-migrasjoner
+    - EF.Core-konfigurasjoner
+    - Eventuelle SQL-skript som bør kjøres ved deployment kan også ligge her
+    - Repository-mønster for database-transaksjoner
+  - Forretningslag
+    - Forretningsrelaterte entiteter (kan ligne på eller være forskjellige fra Data-lagets entiteter)
+    - Facade-mønster for å koordinere database, eksterne systemer og forretningsrelatert logikk
+  - Web-lag
+    - ASP.NET Core-applikasjonen
+    - API-endepunkter
+    - Autentiserings- og autorisasjonspolicyer
+    - API-kontrakter (Request, Response)
 
 ## Autentisering og autorisasjon
 
 ### Autentisering
 
-- API-et brukes av kun en Frontend tjeneste (BFF)
-  - OIDC autentisering
-  - Webben (API) tar imot id token fra IDP of lager applikasjon cookie
-  - Endepunktene er beskytet av cookie
-- API-er brukes av andre systemer
-  - Proxy autentisering for Server to server kaller
-  - OIDC JWT token for alle andre type requester
+- API-et brukes kun av én frontend-tjeneste (BFF)
+  - OIDC-autentisering
+  - Web-API-et mottar ID-token fra IDP og oppretter applikasjons-cookie
+  - Endepunktene er beskyttet av cookie
+- API-er som brukes av andre systemer
+  - Proxy-autentisering for server-til-server-kall
+  - OIDC JWT-token for alle andre typer forespørsler
 
 ### Autorisasjon
 
-- Første beskyttelse lag: Autorisasjon policy + ASP.NET Core autorisasjons middelware
-- Domenespesifikke autorisasjon bør ligge i forretningslaget.
-- Kritiske data relaterte autorisasjon bør ligge nær databasen (Data laget - repository)
+- Første beskyttelseslag: autorisasjonspolicy + ASP.NET Core-autorisasjonsmiddleware
+- Domenespesifikk autorisasjon bør ligge i forretningslaget
+- Kritisk datarelatert autorisasjon bør ligge nær databasen (Data-laget / repository)
 
-## Logging, feilhåndtering og vervåking
+## Logging, feilhåndtering og overvåking
 
 - Strukturert logging (Serilog)
-- Centralisert logging system (Seq, Grafana, etc)
-- Alle håndterte og ikke håndterte feil bør formidle en desriptiv melding til brukeren
-  - Relaterte brukevennlig melding ved håndterte feil
-  - Nok data slik at brukeren kan enkelt få hjelp av support (eksempel: CorrelationId)
-- Loggene må ha nok informasjon med seg for kunne gjennskape de
-- Hoved aksjonene bør ha informasjon om brukte tid for å kuune overvåke ytelse
-- Verktøy som Dynatrace, Grafana eller lignende for å overvåke ytelse eller prod relaterte hendelser
+- Sentralisert loggsystem (Seq, Grafana, etc.)
+- Alle håndterte og ikke-håndterte feil bør formidle en beskrivende melding til brukeren:
+  - Brukervennlig melding ved håndterte feil
+  - Nok informasjon slik at brukeren enkelt kan få hjelp av support (for eksempel CorrelationId)
+- Loggene må ha nok informasjon til at hendelser kan gjenskapes
+- Hovedaksjoner bør logge tidsbruk for å kunne overvåke ytelse
+- Verktøy som Dynatrace, Grafana eller lignende brukes til å overvåke ytelse og produksjonsrelaterte hendelser
 
 ## Testing og dokumentasjon
 
-- NUnit/xUnit til unit og integrasjon testene
-- InMemory testdata og EFCore database for testene
-- Cypress, Playwright eller lignende til frontend end to end testing
-- Open API/Swagger til API schema og dokumentasjon
-- readme filer, wiki sider eller lignende til dokumentering av viktige avgjørelser, arkitektur, ...
+- NUnit/xUnit til unit- og integrasjonstester
+- InMemory-testdata og EFCore-database for testene
+- Cypress, Playwright eller lignende for frontend end-to-end-testing
+- OpenAPI/Swagger for API-skjema og dokumentasjon
+- README-filer, wiki-sider eller lignende for dokumentasjon av viktige avgjørelser, arkitektur osv.

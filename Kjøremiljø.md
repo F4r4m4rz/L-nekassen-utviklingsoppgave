@@ -1,53 +1,53 @@
 # Kjøremiljø
 
-## Valg av platform
+## Valg av plattform
 
-- Jeg selv har mest erfaring med klassik server arkitektur
-- For en enkel API ville jeg brukt docker for å unngå kompleksitet
-- Skal det være en mikrotjeneste arkitektur da kubernetes kan være lurt å bruke
+- Jeg har mest erfaring med klassisk serverarkitektur
+- For et enkelt API ville jeg brukt Docker for å unngå kompleksitet
+- Skal det være en mikrotjenestearkitektur, kan Kubernetes være et godt valg
 
-## CI/CD Pipeline
+## CI/CD-pipeline
 
-- Min no.1 preferanse:
-  - Azure DevOps som kode repo
+- Min nr. 1-preferanse:
+  - Azure DevOps som kode-repo
   - TeamCity for bygg
   - Octopus for deployment
-- Eller:
-  - Github/Azure devops som kode repo
-  - Github actions/Azure pipelines for bygg og deploy
-- Ønsket repo policy
-  - Låst main gren
-  - feature grener for utvikling
-    - Pull request med påbud kode review (Den hjelper med bedre kode kvalitet og å spre kunnskap om koden)
-  - release grener for deploymeny til produksjon
+- Alternativt:
+  - GitHub eller Azure DevOps som kode-repo
+  - GitHub Actions eller Azure Pipelines for bygg og deployment
+- Ønsket repo-policy:
+  - Låst main-gren
+  - Feature-grener for utvikling
+    - Pull request med krav om kodegjennomgang (bidrar til bedre kodekvalitet og kunnskapsdeling)
+  - Release-grener for deployment til produksjon
 
 ## Miljøhåndtering
 
-- Develpment
-  - Lokal develper machine
+- Development
+  - Lokal utviklermaskin
 - DevTest
-  - Relativt stabil miljø
-  - Både main, release og feature grener kan enkelt deployes for testing
+  - Relativt stabilt miljø
+  - Både main-, release- og feature-grener kan enkelt deployes for testing
 - Staging
-  - Veldig nær produksjon men med test data
-  - Stabil
-  - Ingen feature gren deployment
-  - Deployments må koordineres og informeres til andre team for å oppnå en stabil miljø
+  - Svært likt produksjon, men med testdata
+  - Stabilt miljø
+  - Ingen feature-gren-deployments
+  - Deployments må koordineres og kommuniseres med andre team for å sikre stabilitet
 - Produksjon
-  - Hoved miljøet
-  - Begrenset utvikler tilgang
-  - Kun deployment av main og release grener ved tilstrekkelig testing in forkant
-  - Kontrollert of planlagt deployments
+  - Hovedmiljøet
+  - Begrenset utviklertilgang
+  - Kun deployment av main- og release-grener etter tilstrekkelig testing i forkant
+  - Kontrollerte og planlagte deployments
 
 ## Tilgjengelighet og skalerbarhet
 
-- Health check (Kan integreres med kubernetes for å automatisk restart)
-- Load balancing og auto scaling av CPU
+- Health-check (kan integreres med Kubernetes for automatisk restart)
+- Load balancing og autoskalering basert på CPU
 
-## Sikkerhet of screts håndtering
+## Sikkerhet og secrets-håndtering
 
-- Azure Key-vault til å håndtere secrets
-- Env variable til å håndtere azure key-vault secrets og andre super viktige secrets
-- OWASP Top 10
-- SAST og DAST kode skanning (Snyk, Veracode, ...)
-- Reglemesig Pentest
+- Azure Key Vault til håndtering av secrets
+- Miljøvariabler for å håndtere Azure Key Vault-secrets og andre kritiske nøkler
+- OWASP Top 10 som sikkerhetsreferanse
+- SAST og DAST-kodeskanning (Snyk, Veracode, ...)
+- Regelmessig pentest
